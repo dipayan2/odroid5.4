@@ -445,21 +445,21 @@ static void od_set_powersave_bias(unsigned int powersave_bias)
 	put_online_cpus();
 }
 
-void od_register_powersave_bias_handler(unsigned int (*f)
-		(struct cpufreq_policy *, unsigned int, unsigned int),
-		unsigned int powersave_bias)
-{
-	od_ops.powersave_bias_target = f;
-	od_set_powersave_bias(powersave_bias);
-}
-EXPORT_SYMBOL_GPL(od_register_powersave_bias_handler);
+// void od_register_powersave_bias_handler(unsigned int (*f)
+// 		(struct cpufreq_policy *, unsigned int, unsigned int),
+// 		unsigned int powersave_bias)
+// {
+// 	od_ops.powersave_bias_target = f;
+// 	od_set_powersave_bias(powersave_bias);
+// }
+// EXPORT_SYMBOL_GPL(od_register_powersave_bias_handler);
 
-void od_unregister_powersave_bias_handler(void)
-{
-	od_ops.powersave_bias_target = generic_powersave_bias_target;
-	od_set_powersave_bias(0);
-}
-EXPORT_SYMBOL_GPL(od_unregister_powersave_bias_handler);
+// void od_unregister_powersave_bias_handler(void)
+// {
+// 	od_ops.powersave_bias_target = generic_powersave_bias_target;
+// 	od_set_powersave_bias(0);
+// }
+// EXPORT_SYMBOL_GPL(od_unregister_powersave_bias_handler);
 
 static int __init cpufreq_gov_dbs_init(void)
 {
