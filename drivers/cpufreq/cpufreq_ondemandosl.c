@@ -140,7 +140,8 @@ static void od_update(struct cpufreq_policy *policy)
 	unsigned int load = dbs_update(policy);
 
 	dbs_info->freq_lo = 0;
-
+    pr_info("[DIP]target for CPU %u: load %u\n",
+		 policy->cpu, load);
 	/* Check for frequency increase */
 	if (load > dbs_data->up_threshold) {
 		/* If switching to max speed, apply sampling_down_factor */
@@ -410,40 +411,40 @@ static struct dbs_governor od_dbs_gov = {
 
 #define CPU_FREQ_GOV_ONDEMANDOSL	(&od_dbs_gov.gov)
 
-static void od_set_powersave_bias(unsigned int powersave_bias)
-{
-	unsigned int cpu;
-	cpumask_t done;
+// static void od_set_powersave_bias(unsigned int powersave_bias)
+// {
+// 	unsigned int cpu;
+// 	cpumask_t done;
 
-	default_powersave_bias = powersave_bias;
-	cpumask_clear(&done);
+// 	default_powersave_bias = powersave_bias;
+// 	cpumask_clear(&done);
 
-	get_online_cpus();
-	for_each_online_cpu(cpu) {
-		struct cpufreq_policy *policy;
-		struct policy_dbs_info *policy_dbs;
-		struct dbs_data *dbs_data;
-		struct od_dbs_tuners *od_tuners;
+// 	get_online_cpus();
+// 	for_each_online_cpu(cpu) {
+// 		struct cpufreq_policy *policy;
+// 		struct policy_dbs_info *policy_dbs;
+// 		struct dbs_data *dbs_data;
+// 		struct od_dbs_tuners *od_tuners;
 
-		if (cpumask_test_cpu(cpu, &done))
-			continue;
+// 		if (cpumask_test_cpu(cpu, &done))
+// 			continue;
 
-		policy = cpufreq_cpu_get_raw(cpu);
-		if (!policy || policy->governor != CPU_FREQ_GOV_ONDEMANDOSL)
-			continue;
+// 		policy = cpufreq_cpu_get_raw(cpu);
+// 		if (!policy || policy->governor != CPU_FREQ_GOV_ONDEMANDOSL)
+// 			continue;
 
-		policy_dbs = policy->governor_data;
-		if (!policy_dbs)
-			continue;
+// 		policy_dbs = policy->governor_data;
+// 		if (!policy_dbs)
+// 			continue;
 
-		cpumask_or(&done, &done, policy->cpus);
+// 		cpumask_or(&done, &done, policy->cpus);
 
-		dbs_data = policy_dbs->dbs_data;
-		od_tuners = dbs_data->tuners;
-		od_tuners->powersave_bias = default_powersave_bias;
-	}
-	put_online_cpus();
-}
+// 		dbs_data = policy_dbs->dbs_data;
+// 		od_tuners = dbs_data->tuners;
+// 		od_tuners->powersave_bias = default_powersave_bias;
+// 	}
+// 	put_online_cpus();
+// }
 
 // void od_register_powersave_bias_handler(unsigned int (*f)
 // 		(struct cpufreq_policy *, unsigned int, unsigned int),
