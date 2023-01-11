@@ -76,7 +76,7 @@ static int devfreq_simple_ondemand_func(struct devfreq *df,
 
 	/* Set the desired frequency based on the load */
     load = div_u64(stat->busy_time*100, stat->total_time);
-    pr_info("[DIP]target for DEVFREQ load %u\n", load);
+    pr_info("[DIP]target for DEVFREQ load busy %u, total %u, load\n",stat->busy, stat->total_time, load);
 	a = stat->busy_time;
 	a *= stat->current_frequency;
 	b = div_u64(a, stat->total_time);

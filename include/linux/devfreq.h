@@ -18,7 +18,7 @@
 
 /* DEVFREQ governor name */
 #define DEVFREQ_GOV_SIMPLE_ONDEMAND	"simple_ondemand"
-#define DEVFREQ_GOV_SIMPLE_ONDEMANDOSL	"simple_ondemandosl"
+#define DEVFREQ_GOV_SIMPLE_ONDEMANDOSL	"ondemandosl"
 #define DEVFREQ_GOV_PERFORMANCE		"performance"
 #define DEVFREQ_GOV_POWERSAVE		"powersave"
 #define DEVFREQ_GOV_USERSPACE		"userspace"
